@@ -197,7 +197,7 @@ if resp.status != 200:
 
 # Parse the HTML document and print the results.
 parser = GoogleParser()
-parser.feed(resp.read())
+parser.feed(resp.read().decode('utf8'))
 conn.close()
 
 # vim:set sts=4 sw=4 et:
