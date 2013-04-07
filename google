@@ -18,7 +18,7 @@
 import sys
 import termios, fcntl, struct
 import webbrowser
-import HTMLParser
+import html.parser
 
 from urllib.parse import quote_plus
 from http.client import HTTPConnection
@@ -35,7 +35,7 @@ colorize = False   # If True, colorizes the output (option -C)
 # Classes
 class GoogleParser(HTMLParser.HTMLParser):
     def __init__(self):
-        HTMLParser.HTMLParser.__init__(self)
+        html.parser.HTMLParser.__init__(self)
         self.handle_starttag = self.main_start
         self.handle_data = self.main_data
         self.handle_endtag = self.main_end
