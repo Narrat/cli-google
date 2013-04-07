@@ -33,7 +33,7 @@ openUrl  = False   # If True, opens the first URL in browser (option -j)
 colorize = False   # If True, colorizes the output (option -C)
 
 # Classes
-class GoogleParser(HTMLParser.HTMLParser):
+class GoogleParser(html.parser.HTMLParser):
     def __init__(self):
         html.parser.HTMLParser.__init__(self)
         self.handle_starttag = self.main_start
