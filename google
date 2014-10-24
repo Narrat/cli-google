@@ -76,7 +76,7 @@ class GoogleParser(html.parser.HTMLParser):
     def h3_data(self, data):
         self.title += data
     def h3_end(self, tag):
-        if tag == "h3": 
+        if tag == "h3":
             self.handle_starttag = self.li_start
             self.handle_data = self.li_data
             self.handle_endtag = self.li_end
@@ -197,7 +197,7 @@ if resp.status != 200:
 
 # Parse the HTML document and print the results.
 parser = GoogleParser()
-parser.feed(resp.read().decode('utf8'))
+parser.feed(resp.read().decode('latin1'))
 conn.close()
 
 # vim:set sts=4 sw=4 et:
