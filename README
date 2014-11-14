@@ -1,8 +1,9 @@
 cli-google README
 
 Copyright (C) 2008 Henri Hakkinen
+Copyright (c) 2013-2014 Lex Black
 
-http://henux.nor.fi/coding/projects/6-cli/13-cli-google
+http://henux.nor.fi/coding/projects/6-cli/13-cli-google (dead)
 
 `google` is a command line tool for doing Google searches from the
 terminal.  To install the package to your system, run `make install` as
@@ -17,6 +18,6 @@ Options
   -C       enable color output
   -j       open the first result in a web browser
 
-Report bugs to <henux@users.sourceforge.net>.
+Report bugs at <https://github.com/Narrat/cli-google>.
 
 See the manual page for full details.  Have fun!
