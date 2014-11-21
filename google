@@ -189,6 +189,13 @@ columns = struct.unpack("HH", winsz)[1]
 conn = HTTPSConnection("www.google.com")
 conn.request("GET", url)
 resp = conn.getresponse()
+# Redirect from .com to local google page
+if resp.status == 301 or resp.status == 302:
+    loc = resp.getheader('Location')
+    conn.close()
+    conn = HTTPSConnection("www.google.com")
+    conn.request("GET", loc)
+    resp = conn.getresponse()
 if resp.status != 200:
     # The server responded with an error.
     print("Server responded with an error:", str(resp.status))
