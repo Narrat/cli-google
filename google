@@ -92,6 +92,12 @@ class GoogleParser(html.parser.HTMLParser):
         pass
 
 # Functions
+def connect(body):
+    connection = HTTPSConnection("www.google.com")
+    connection.request("GET", body)
+    response = connection.getresponse()
+    return connection, response
+
 def print_entry(title, url, text):
     # Open the URL in a web browser if option -j was specified.
     if openUrl:
@@ -186,16 +192,13 @@ winsz = fcntl.ioctl(sys.stdout, termios.TIOCGWINSZ, "1234")
 columns = struct.unpack("HH", winsz)[1]
 
 # Connect to Google and request the result page.
-conn = HTTPSConnection("www.google.com")
-conn.request("GET", url)
-resp = conn.getresponse()
-# Redirect from .com to local google page
-if resp.status == 301 or resp.status == 302:
+conn, resp = connect(url)
+# Check for redirects
+while resp.status == 301 or resp.status == 302:
     loc = resp.getheader('Location')
     conn.close()
-    conn = HTTPSConnection("www.google.com")
-    conn.request("GET", loc)
-    resp = conn.getresponse()
+    print("Redirected to:", loc)
+    conn, resp = connect(loc)
 if resp.status != 200:
     # The server responded with an error.
     print("Server responded with an error:", str(resp.status))
